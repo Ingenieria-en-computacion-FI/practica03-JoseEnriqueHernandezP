@@ -10,7 +10,8 @@
 */
 struct Fraccion
 {
-    /* TODO */
+    int numerador;
+   int denominador;
 };
 
 
@@ -20,8 +21,15 @@ struct Fraccion
 */
 int mcd(int a, int b)
 {
-    /* TODO */
-
+   int temporal;
+   if (a < 0) a = -a;
+   if (b < 0) b = -b;
+    
+   while (b != 0) {
+        temporal = b;
+        b = a % b;
+        a = temporal;
+    }
     return 1;
 }
 
@@ -29,61 +37,55 @@ int mcd(int a, int b)
 /* Crear fracción */
 Fraccion* crearFraccion(int num, int den)
 {
-    /* TODO
-       1 Verificar que el denominador no sea 0
-       2 Reservar memoria con malloc
-       3 Asignar numerador y denominador
-       4 Simplificar la fracción
-       5 Regresar la fracción
-    */
-
-    return NULL;
+if (den == 0) {
+        printf("Error: El denominador no puede ser de cero.\n");
+        return NULL;
 }
-
-
+Fraccion* nueva = (Fraccion*)malloc(sizeof(Fraccion));
+    if (nueva == NULL) return NULL;
+nueva->numerador = num;
+nueva->denominador = den;
+simplificar(nueva);
+return nueva;
+}
 /* Simplificar fracción */
 void simplificar(Fraccion* f)
 {
-    /* TODO
-       1 Calcular el MCD
-       2 Dividir numerador y denominador entre el MCD
-    */
+if (f == NULL) return;
+int comun = mcd(f->numerador, f->denominador);
+   f->numerador /= comun;
+   f->denominador /= comun; 
+   if (f->denominador < 0) {
+    f->numerador = -f->numerador;
+    f->denominador = -f->denominador;
+   }
 }
 
 
 /* Sumar fracciones */
 Fraccion* sumar(Fraccion* a, Fraccion* b)
 {
-    /* TODO
-       1 Calcular numerador resultante
-
-          a/b + c/d =
-          (a*d + b*c) / (b*d)
-
-       2 Crear nueva fracción
-       3 Simplificar
-       4 Regresar resultado
-    */
-
-    return NULL;
+   if (a == NULL || b == NULL) return NULL;
+   int num_res = (a->numerador * b->denominador) + (a->denominador * b->numerador);
+    int den_res = a->denominador * b->denominador;
+   return crearFraccion(num_res, den_res);
+   return NULL;
 }
-
-
 /* Imprimir fracción */
 void imprimir(Fraccion* f)
 {
-    /* TODO
-       Imprimir en formato:
-
-       numerador/denominador
-    */
+if (f != NULL) {
+        printf("%d/%d", f->numerador, f->denominador);
+    } else {
+        printf("NULL");
+    }
 }
 
 
 /* Liberar memoria */
 void destruir(Fraccion* f)
 {
-    /* TODO
-       Liberar memoria con free
-    */
+if (f != NULL) {
+        free(f);
+    }
 }
