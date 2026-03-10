@@ -6,37 +6,23 @@ int main()
 
     printf("Prueba del TAD Pelicula\n");
 
-    /* TODO
-       Crear una película
-    */
+    Pelicula* p = crearPelicula("The Matrix", 1999, "Accion");
     Pelicula* p = NULL;
+    
+    agregarDirector(p, "Steven Spielberg");
+    agregarDirector(p, "Stanley Kubrick");
 
-
-    /* TODO
-       Agregar algunos directores
-    */
-
-
-    /* TODO
-       Imprimir película
-    */
+    imprimir(p);
 
 
     printf("\nCambiar genero\n");
 
-    /* TODO
-       Cambiar genero
-    */
+    cambiarGenero(p, "Ciencia Ficcion");
+
+   imprimir(p)
 
 
-    /* TODO
-       Imprimir nuevamente
-    */
-
-
-    /* TODO
-       Liberar memoria
-    */
+    destruir(p);
 
     return 0;
 }
